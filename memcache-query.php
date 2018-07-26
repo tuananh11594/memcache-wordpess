@@ -1,5 +1,4 @@
-<?php 
-
+<?php
     class MemcacheQuery {
 
         function __construct( $host, $port ) {
@@ -12,14 +11,8 @@
             return $this->memcache->connect($this->host, $this->port);
         }
         
-        public function closeMemcache() {
-            if ( $this->memcache != null ) {
-                $this->memcache->close();
-            }
-        }
-
         public function setMemcache( $key, $data, $timeCache ) {
-            $this->memcache->set( $key, $data, false, $timeCache ) or die( "Failed to save data at the memcache server" );
+            return $this->memcache->set( $key, $data, false, $timeCache );
         }
 
         public function getMemcache( $key ) {
@@ -27,5 +20,11 @@
             return $dataMemcache;
         }
 
-}
+        public function closeMemcache() {
+            if ( $this->memcache != null ) {
+                $this->memcache->close();
+            }
+        }
+
+    }
 ?>
